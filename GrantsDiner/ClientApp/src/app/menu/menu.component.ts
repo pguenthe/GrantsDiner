@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuDataService } from '../menu-data';
 import { MenuItem } from '../interfaces/menu';
+import { CartDataService } from '../cart-data.service';
 
 @Component({
     selector: 'app-menu',
@@ -10,7 +11,8 @@ import { MenuItem } from '../interfaces/menu';
 /** menu component*/
 export class MenuComponent {
   /** menu ctor */
-  constructor(private menuData: MenuDataService) { }
+  constructor(private menuData: MenuDataService,
+    private cartData: CartDataService) { }
 
   items: MenuItem[];
 
@@ -21,5 +23,12 @@ export class MenuComponent {
       },
       error => console.error(error)
     );
+  }
+
+  add(id: number) {
+    this.cartData.postCartItem(id).subscribe(
+      (data: any) => console.log('success! ' + id), //TODO: change the button
+      error => console.error(error)
+    )
   }
 }

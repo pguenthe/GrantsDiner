@@ -7,23 +7,27 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { MenuComponent } from './menu/menu.component';
+import { CartComponent } from './cart/cart.component';
 import { MenuDataService } from './menu-data';
+import { CartDataService } from './cart-data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     MenuComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      { path: 'cart', component: CartComponent },
       { path: '', component: MenuComponent},
     ])
   ],
-  providers: [MenuDataService],
+  providers: [MenuDataService, CartDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,10 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\interfaces\cart.ts" />
     <None Remove="ClientApp\src\app\interfaces\menu.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\cart.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\menu.ts" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 <h2>Menu</h2>
 <div *ngFor="let item of items">
-  <h3>{{item.name}} {{item.price}}</h3>
+  <h3>{{item.name}} {{item.price}} <button (click)="add(item.id)">Add to Bag</button></h3>
   <h4>{{item.category}}</h4>
   {{item.description}}
 </div>

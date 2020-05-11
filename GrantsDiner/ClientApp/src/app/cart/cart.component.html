@@ -1,0 +1,14 @@
+<h2>Bag</h2>
+<div *ngFor="let item of cartItems">
+  <h2>{{item.name}} Qty: {{item.quantity}}</h2>
+  {{item.price}}
+  <button (click)="delete(item.id)">Remove from Bag</button>
+</div>
+
+<div *ngIf="cartItems?.length===0">
+  Your cart is empty
+</div>
+
+<h3>
+  Total: {{total | currency}}
+</h3>

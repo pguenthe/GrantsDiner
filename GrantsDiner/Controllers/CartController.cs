@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,15 +23,20 @@ namespace GrantsDiner.Controllers
             connString = config.GetConnectionString("default");
         }
 
-        //get: all the menu items (api/menu)
-        [HttpGet] //api/menu
-        public IEnumerable<ShoppingCart> Get()
+        //get: all this user's cart items (api/cart)
+        [HttpGet("{id}")] //api/menu
+        public IEnumerable<JoinedItem> Get(int id)
         {
             SqlConnection conn = new SqlConnection(connString);
-            string command = "SELECT * FROM ShoppingCart INNER JOIN MenuItems";
-            command += " ON ShoppingCart.ItemID = MenuItems.ID";
+            //string command = "SELECT * FROM ShoppingCart WHERE UserID=@id";
+            //todo: stored procedure for below
+            string command = "SELECT s.ID, s.ItemID, s.UserID, s.Quantity, ";
+            command += "m.Name, m.Category, m.Description, m.Price ";
+            command += "FROM ShoppingCart s INNER JOIN MenuItems m";
+            command += " ON s.ItemID = m.ID WHERE s.UserID=@id";
 
-            IEnumerable<ShoppingCart> result = conn.Query<ShoppingCart>(command);
+            IEnumerable<JoinedItem> result = conn.Query<JoinedItem>(command,
+                new { id = id });
 
             conn.Close();
 
@@ -54,6 +60,7 @@ namespace GrantsDiner.Controllers
 
             conn.Close();
 
+            //TODO: Return success or error code
             return new
             {
                 result = result,
@@ -64,6 +71,23 @@ namespace GrantsDiner.Controllers
         //getByUserID
 
         //delete (to remove an item from the cart)
+        [HttpDelete("{id}")]
+        public Object Delete(int id)
+        {
+            SqlConnection conn = new SqlConnection(connString);
+            string command = "DELETE FROM ShoppingCart WHERE ID=@id";
+
+            int result = conn.Execute(command, new { id = id });
+
+            conn.Close();
+
+            //TODO: Return success or error code
+            return new
+            {
+                result = result,
+                success = result == 1 ? true : false
+            };
+        }
 
         //put/patch (to change quantities)
 
