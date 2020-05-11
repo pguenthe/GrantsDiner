@@ -1,1 +1,6 @@
-﻿<div style="border: 1px solid red">menu Component</div>
+<h2>Menu</h2>
+<div *ngFor="let item of items">
+  <h3>{{item.name}} {{item.price}}</h3>
+  <h4>{{item.category}}</h4>
+  {{item.description}}
+</div>
