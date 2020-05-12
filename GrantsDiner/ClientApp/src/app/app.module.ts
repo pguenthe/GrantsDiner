@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { MenuComponent } from './menu/menu.component';
+import { MenuCategoryComponent } from './menu-category/menu-category.component';
 import { CartComponent } from './cart/cart.component';
 import { MenuDataService } from './menu-data';
 import { CartDataService } from './cart-data.service';
@@ -16,6 +17,7 @@ import { CartDataService } from './cart-data.service';
     AppComponent,
     NavMenuComponent,
     MenuComponent,
+    MenuCategoryComponent,
     CartComponent
   ],
   imports: [

@@ -8,8 +8,8 @@ export class CartDataService {
 
   constructor(private http: HttpClient) {
     //user ID is a random number between 1 and 1,000,000
-    //this.userID = Math.floor(Math.random() * 1000000) + 1;
-    this.userID = 13;
+    this.userID = Math.floor(Math.random() * 1000000) + 1;
+    //this.userID = 13;
   }
 
   getCartItems() {

@@ -14,21 +14,27 @@ export class MenuComponent {
   constructor(private menuData: MenuDataService,
     private cartData: CartDataService) { }
 
-  items: MenuItem[];
+  categories: string[];
+  menuSection: boolean[] = [];
 
   ngOnInit() {
-    this.menuData.getMenuItems().subscribe(
-      (data: MenuItem[]) => {
-        this.items = data;
+    this.menuData.getCategories().subscribe(
+      (data: string[]) => {
+        for (let i = 0; i < data.length; i++) {
+          this.menuSection.push(true);
+        }
+        this.categories = data;
       },
       error => console.error(error)
     );
   }
 
-  add(id: number) {
-    this.cartData.postCartItem(id).subscribe(
-      (data: any) => console.log('success! ' + id), //TODO: change the button
-      error => console.error(error)
-    )
+  showMenuSection(section: number) {
+    for (let i = 0; i < this.menuSection.length; i++) {
+      this.menuSection[i] = true;
+    }
+
+    this.menuSection[section] = false;
   }
+
 }

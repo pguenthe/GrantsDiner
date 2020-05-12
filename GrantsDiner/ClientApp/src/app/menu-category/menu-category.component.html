@@ -1,0 +1,5 @@
+<div *ngFor="let item of items" class="menu-item">
+  <h4>{{item.name}} {{item.price}}</h4>
+  {{item.description}}
+  <button class="btn-secondary" (click)="add(item.id)">Add to Bag</button>
+</div>
