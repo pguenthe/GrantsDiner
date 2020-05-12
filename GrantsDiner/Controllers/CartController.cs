@@ -58,6 +58,17 @@ namespace GrantsDiner.Controllers
         }
 
         //put/patch (to change quantities)
+        [HttpPut]
+        public Object Put (ShoppingCart item)
+        {
+            int result = dal.UpdateInCart(item);
 
+            //TODO: Return success or error code
+            return new
+            {
+                result = result,
+                success = result == 1 ? true : false
+            };
+        }
     }
 }

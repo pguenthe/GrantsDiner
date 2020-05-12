@@ -1,8 +1,7 @@
 <h2>Bag</h2>
 <div class="cart-item" *ngFor="let item of cartItems">
-  <h3>{{item.name}} Qty: {{item.quantity}}</h3>
-  {{item.price}}
-  <button (click)="delete(item.id)">Remove from Bag</button>
+  <app-cart-item [item]="item" (deleteEmitter)="delete($event)"
+      (updateEmitter)="update($event)"></app-cart-item>
 </div>
 
 <div *ngIf="cartItems?.length===0">

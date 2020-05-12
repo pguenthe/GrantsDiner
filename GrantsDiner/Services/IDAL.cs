@@ -12,5 +12,6 @@ namespace GrantsDiner.Services
         IEnumerable<JoinedItem> GetCart(int id);
         int AddToCart(ShoppingCart cartItem);
         int DeleteFromCart(int id);
+        int UpdateInCart(ShoppingCart item);
     }
 }

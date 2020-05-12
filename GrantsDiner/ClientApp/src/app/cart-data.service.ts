@@ -17,7 +17,18 @@ export class CartDataService {
   }
 
   deleteCartItem(itemID: number) {
+    console.log("deleting...");
     return this.http.delete('/api/cart/' + itemID);
+  }
+
+  updateCartItem(item: CartItem) {
+    console.log(item.quantity);
+    if (item.quantity == 0) {
+      return this.deleteCartItem(item.id);
+    } else {
+      console.log(`Received item to update: ${item.id} ${item.userID} ${item.itemID} ${item.quantity}`);
+      return this.http.put('/api/cart/', item);
+    }
   }
 
   postCartItem(itemID: number) {

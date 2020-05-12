@@ -1,0 +1,5 @@
+<h3>{{item.name}}</h3>
+Qty: <input [(ngModel)]="item.quantity" (focusout)="update(item.id, item.quantity)" />
+{{item.price}}
+<button (click)="delete(item.id)">Remove from Bag</button>
+

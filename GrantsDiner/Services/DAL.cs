@@ -113,5 +113,19 @@ namespace GrantsDiner.Services
 
             return result;
         }
+
+        public int UpdateInCart(ShoppingCart item)
+        {
+            SqlConnection conn = new SqlConnection(connString);
+            string command = "UPDATE ShoppingCart ";
+            command += "SET Quantity=@Quantity ";
+            command += "WHERE ID=@ID";
+
+            int result = conn.Execute(command, item);
+
+            conn.Close();
+
+            return result;
+        }
     }
 }

@@ -17,7 +17,6 @@ export class MenuCategoryComponent {
     private cartData: CartDataService) { }
 
   ngOnInit() {
-    console.log('initialized ' + this.category);
     this.menuData.getMenuItemsByCategory(this.category).subscribe(
       (data: MenuItem[]) => {
         this.items = data;

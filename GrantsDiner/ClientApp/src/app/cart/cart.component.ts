@@ -31,6 +31,16 @@ export class CartComponent {
     );
   }
 
+  update(item:CartItem) {
+    this.cartData.updateCartItem(item).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.get();
+      },
+      error => console.error(error)
+    );
+  }
+
   get() {
     this.cartData.getCartItems().subscribe(
       (data: JoinedItem[]) => {
