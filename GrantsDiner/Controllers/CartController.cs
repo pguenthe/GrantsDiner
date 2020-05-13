@@ -31,7 +31,28 @@ namespace GrantsDiner.Controllers
         [HttpPost]
         public Object AddToCart(ShoppingCart cartItem)
         {
-            int result = dal.AddToCart(cartItem);
+            IEnumerable<JoinedItem> cart = dal.GetCart(cartItem.UserID);
+
+            int result = 0;
+
+            foreach (JoinedItem item in cart)
+            {
+                //check if the same item is already in cart
+                if (item.ItemID == cartItem.ItemID)
+                {
+                    result = dal.UpdateInCart(
+                        new ShoppingCart {
+                            ID = item.ID,
+                            ItemID = item.ItemID,
+                            UserID = item.UserID,
+                            Quantity = item.Quantity + 1
+                        });
+
+                    return result;
+                }
+            }
+
+            result = dal.AddToCart(cartItem);
 
             //TODO: Return success or error code
             return new
@@ -61,6 +82,11 @@ namespace GrantsDiner.Controllers
         [HttpPut]
         public Object Put (ShoppingCart item)
         {
+            if (item.Quantity == 0)
+            {
+                return Delete(item.ID);
+            }
+
             int result = dal.UpdateInCart(item);
 
             //TODO: Return success or error code

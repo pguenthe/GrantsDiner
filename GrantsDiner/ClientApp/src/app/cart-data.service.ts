@@ -22,7 +22,6 @@ export class CartDataService {
   }
 
   updateCartItem(item: CartItem) {
-    console.log(item.quantity);
     if (item.quantity == 0) {
       return this.deleteCartItem(item.id);
     } else {
